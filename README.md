@@ -59,3 +59,5 @@ Some examples are shown below:
         </center></div></td> 
 
 </table></div>
+
+You can modify the code in the `demo.py` to run **DeepView** on other datasets and models.
