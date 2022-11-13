@@ -16,7 +16,7 @@ import json
 from visualization import visualization
 
 device = "cuda"
-coco_root = 'coco2017'
+coco_root = './data/coco2017'
 batchsize = 1
 
 
@@ -119,7 +119,7 @@ def DeepView(datapath):
 
 
 if __name__ == "__main__":
-    # Inference()  # Model Inference
+    Inference()  # Model Inference
 
     deepview_result = DeepView(datapath='./data/FRCNN_COCO070.json')
 
