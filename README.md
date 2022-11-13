@@ -23,7 +23,7 @@ top-k instances back to the original image according to your
 annotation budget and highlight them to provide to the annotator
 
 The annotator only needs to focus on the highlighted 
-area and give it an annotation
+areas and annotate them 
 
 Some examples are shown below:
 
@@ -31,38 +31,31 @@ Some examples are shown below:
 	<tr>
         <td><div><center>	<!--每个格子内是图片加标题-->
         	<img src="./data/example_1.png"
-                 alt="Typora-Logo"
+                 alt="example_1"
                  height="120"/>	<!--高度设置-->
         	<br>	<!--换行-->
         		<!--标题1-->
         </center></div></td>    
      	<td><div><center>	<!--第二张图片-->
-    		<img src="./demodata/DFaLo_offline_result/8_label_7.png"
-                 alt="Typora-Logo"
+    		<img src="./data/example_2.png"
+                 alt="example_2"
                  height="120"/>	
     		<br>
     		 <!--标题1-->
         </center></div></td>
         <td><div><center>	<!--每个格子内是图片加标题-->
-        	<img src="./data/example_2.png"
-                 alt="Typora-Logo"
+        	<img src="./data/example_3.png"
+                 alt="example_3"
                  height="120"/>	<!--高度设置-->
         	<br>	<!--换行-->
         		<!--标题1-->
         </center></div></td> 
         <td><div><center>	<!--每个格子内是图片加标题-->
-        	<img src="./demodata/DFaLo_offline_result/21_label_7.png"
-                 alt="Typora-Logo"
+        	<img src="./data/example_4.png"
+                 alt="example_4"
                  height="120"/>	<!--高度设置-->
         	<br>	<!--换行-->
         		<!--标题1-->
         </center></div></td> 
-        <td><div><center>	<!--每个格子内是图片加标题-->
-        	<img src="./demodata/DFaLo_offline_result/45_label_1.png"
-                 alt="Typora-Logo"
-                 height="120"/>	<!--高度设置-->
-        	<br>	<!--换行-->
-        		<!--标题1-->
-        </center></div></td> 
-	</tr>
+
 </table></div>
