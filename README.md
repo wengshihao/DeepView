@@ -16,7 +16,7 @@ We prepare a demo for **DeepView**:
 
 In order to run this demo, you should first download [coco2017val](https://cocodataset.org/#download) dataset in the data folder
 
-## Output
+## Output and Annotation
 `deepview_result.json` is the output of **DeepView**, 
 which is a prioritized set of instances that you can map 
 top-k instances back to the original image according to your 
