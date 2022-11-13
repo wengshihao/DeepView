@@ -27,8 +27,7 @@ model = fasterrcnn_resnet50_fpn_v2(weights=weights, box_score_thresh=0.7)
 
 data_transform = weights.transforms()
 
-val_dataset = COCOdataset(coco_root, "val", data_transform,
-                          ex_transforms=my_transforms.AddGaussianNoise(amplitude=10))  #
+val_dataset = COCOdataset(coco_root, "val", data_transform)  #
 
 val_dataset_loader = torch.utils.data.DataLoader(val_dataset,
                                                  batch_size=batchsize,
@@ -65,4 +64,5 @@ with torch.no_grad():
     json_str = json.dumps(results, indent=4)
     with open('gaus_FRCNN_COCO070.json', 'w') as json_file:
         json_file.write(json_str)
+
 

@@ -15,54 +15,7 @@ class Metrics():
         self.imgpre_list = imgpre_list
         self.dif_list = dif_list
 
-    def Euler_distance(self):
-        def getdis(x_list, y_list):
-            dis = 0.
-            for x, y in zip(x_list, y_list):
-                dis += (x - y) ** 2
-            return math.sqrt(dis)
 
-        result = []
-        for i, x in enumerate(self.pre_list):
-            full_score = x['full_score']
-            gt = [0 for _ in range(len(full_score))]
-            gt[full_score.index(max(full_score[1:]))] = 1
-            assert gt[0] != 1
-            result.append([x['dis_score'], getdis(gt, full_score)])
-        return result
-
-    def Euler_distance_DIS(self):
-        def getdis(x_list, y_list):
-            dis = 0.
-            for x, y in zip(x_list, y_list):
-                dis += (x - y) ** 2
-            return math.sqrt(dis)
-
-        result = []
-        for i, x in enumerate(self.pre_list):
-            full_score = x['full_score']
-            gt = [0 for _ in range(len(full_score))]
-            gt[full_score.index(max(full_score[1:]))] = 1
-            assert gt[0] != 1
-            result.append(getdis(gt, full_score))  # +math.sqrt(2)*(1-full_score[0]))
-        return result
-
-    def Cos(self):
-
-        def get_cos(X, Y):
-            X = np.array(X)
-            Y = np.array(Y)
-            return X.dot(Y) / (np.sqrt(X.dot(X)) * np.sqrt(Y.dot(Y)))
-
-        result = []
-        for i, x in enumerate(self.pre_list):
-            full_score = x['full_score']
-            gt = [0 for _ in range(len(full_score))]
-            gt[full_score.index(max(full_score[1:]))] = 1
-            assert gt[0] != 1
-            result.append(-get_cos(full_score, gt))
-
-        return result
 
     def Dis_p(self,datatype):
         eva = Evaluation(datatype)
@@ -99,67 +52,6 @@ class Metrics():
         # result = min_max_scaler.fit_transform(result)
         return [x[0] * x[1] for x in result]
 
-    def Cos_p0(self):
-
-        def get_cos(X, Y):
-            X = np.array(X)
-            Y = np.array(Y)
-            return X.dot(Y) / (np.sqrt(X.dot(X)) * np.sqrt(Y.dot(Y)))
-
-        result = []
-        for i, x in enumerate(self.pre_list):
-            full_score = x['full_score']
-            gt = [0 for _ in range(len(full_score))]
-            gt[full_score.index(max(full_score[1:]))] = 1
-            assert gt[0] != 1
-            result.append(-get_cos(full_score, gt) + full_score[0])
-
-        return result
-
-    def Dis_Cos(self):
-
-        def get_cos(X, Y):
-            X = np.array(X)
-            Y = np.array(Y)
-            return X.dot(Y) / (np.sqrt(X.dot(X)) * np.sqrt(Y.dot(Y)))
-
-        result = []
-        for i, x in enumerate(self.pre_list):
-            full_score = x['full_score']
-            gt = [0 for _ in range(len(full_score))]
-            gt[full_score.index(max(full_score[1:]))] = 1
-            assert gt[0] != 1
-            result.append([x['dis_score'], get_cos(full_score, gt)])
-
-        min_max_scaler = preprocessing.MinMaxScaler()
-        result = min_max_scaler.fit_transform(result)
-        return [x[0] - x[1] for x in result]
-
-    def Gini(self):
-        result = []
-        for i, x in enumerate(self.pre_list):
-            full_score = x['full_score']
-            gini = 1 - sum([_ ** 2 for _ in full_score])
-            result.append(gini)
-        return result
-
-    def my_entropy(self):
-        result = []
-        for i, x in enumerate(self.pre_list):
-            full_score = x['full_score']
-            entropy = sum([-p * math.log(p) for p in full_score])
-            result.append([x['dis_score'], entropy])
-        min_max_scaler = preprocessing.MinMaxScaler()
-        result = min_max_scaler.fit_transform(result)
-        return [x[0] + x[1] for x in result]
-
-    def entropy_instance(self):
-        result = []
-        for i, x in enumerate(self.pre_list):
-            full_score = x['full_score']
-            result.append(sum([-p * math.log(p) for p in full_score]))
-
-        return result
 
     def one_minus_pmax(self, part="all"):
         result = [(1 - x['score']) for x in self.pre_list]
@@ -202,33 +94,7 @@ class Metrics():
             result.append(img_id.index(x['image_id']))
         return result
 
-    def margin(self):
-        eva = Evaluation()
-        iou_list = eva.get_dif(pre_list=self.pre_list, dif_list=self.dif_list)
-        print(len([x for x in iou_list if x <= 0.3]) / len(iou_list))
 
-        # srt_iou_list = sorted(iou_list)
-        # max_gap = -1
-        # T_iou = 0
-        # cm2 = plt.cm.get_cmap('RdYlBu_r')
-        # eva2 = Evaluation()
-        # loss = eva2.get_loss(pre_list=self.pre_list)
-        # plt.scatter([1 - iou_list[i] for i in range(len(self.pre_list))],
-        #             [1 - self.pre_list[i]['score'] for i in range(len(self.pre_list))], c=loss, cmap=cm2)
-        # plt.xlabel('Consistance')
-        # plt.ylabel('Uncertainty')
-        # plt.colorbar()
-        # plt.legend()
-        # plt.show()
-        def one_two_(x):
-            return - (1.7 * x[-1] + 1.3 * x[-2]) ** 2
-
-        result = [[(1 - iou_list[i]), one_two_(sorted(self.pre_list[i]['full_score'][1:]))] for i in
-                  range(len(self.pre_list))]
-        # min_max_scaler = preprocessing.MinMaxScaler()
-        # result = min_max_scaler.fit_transform(result)
-        ## if iou_list[i] ==0 else (1 - self.pre_list[i]['score']) for
-        return [x[1] for x in result]
 
     def difference(self,datatype):
         eva = Evaluation(datatype)
