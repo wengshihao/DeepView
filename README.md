@@ -7,6 +7,11 @@ Object Detection Systems**
 
 ![overview](./data/overview.Png) 
 
+Object detection models have been widely deployed in military and life-related intelligent software systems. However, along with the outstanding success of object detection, it may exhibit abnormal behavior and lead to severe accidents and losses. During the development and evaluation process, training and evaluating an object detection model are computationally intensive, while preparing annotated tests requires extremely heavy manual labor. Therefore, reducing the annotation-budget of test data collection becomes a challenging and necessary task. Although many test prioritization approaches for DNN-based systems have been proposed, the large differences between classification and object detection make them difficult to be applied to the testing of object detection models.
+
+In this paper, we propose **DeepView**, a novel instance-level test prioritization tool for object detection models to reduce data annotation costs. **DeepView** is based on splitting object detection results into instances and calculating the capability of locating and classifying an instance, respectively. We further designed a test prioritization tool that enables testers to improve model performance by focusing on instances that may cause model errors from a large unlabeled dataset. To evaluate DeepView, we conduct an extensive empirical study on two kinds of object detection model architectures and two commonly used datasets. The experimental results show that **DeepView** outperforms existing test prioritization approaches regarding effectiveness and diversity. Also, we observe that using **DeepView** can effectively improve the accuracy and robustness of object detection models.
+
+
 ## Installation
 `pip install -r requirements.txt`
 
