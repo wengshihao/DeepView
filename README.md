@@ -34,6 +34,14 @@ In this paper, we propose **DeepView**, a novel instance-level test prioritizati
 
 ## Experimental Results
 
+The complete experimental results of DeepView+ are stored below:
+
+**effectiveness**: `./exp_res/effectiveness`
+
+**diversity**: `./exp_res/diversity`
+
+**guidance**: `./exp_res/guidance`
+
 ## Usage
 We prepared a complete demo running DeepView+ on the COCOval dataset mentioned in the paper. You can run this demo by executing:
 
